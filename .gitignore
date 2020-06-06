@@ -1,3 +1,7 @@
 odbc_driver/*
 !odbc_driver/.gitkeep
 mysql/*
+wai/*
+!wai/.gitkeep
+include/*
+!include/.gitkeep
