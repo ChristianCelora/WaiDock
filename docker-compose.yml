@@ -26,7 +26,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./src:/var/www/wai
+      - ./wai:/var/www/wai
+      - ./include:/var/www/include
       - ./apache/default.conf:/etc/apache2/sites-available/000-default.conf # per creare i virtualhost sovrascriviamo il default.conf
       - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     ports:
@@ -34,3 +35,7 @@ services:
       - "8081:80"
     networks:
       - wai
+# Una volta eseguito il container cambiare i permessi della cartella wai e include con il comando
+# sudo chown -R <user>:33 wai/  
+# sudo chown -R <user>:33 include/  
+# Dove <user> è l'utente del vostro pc (x modificare i file) e 33 è l'id dell'utente www-data (per farlo eseguire all'apache del docker)

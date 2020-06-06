@@ -12,11 +12,8 @@ COPY ./odbc_driver/odbc.ini /etc/odbc.ini
 COPY ./odbc_driver/odbcinst.ini /etc/odbcinst.ini
 
 # test connection
-RUN isql -v AS400
+# RUN isql -v AS400
 
 # [unixODBC][Driver Manager]Can't open lib '/opt/ibm/iSeriesAccess/lib64/libcwbodbc.so' : file not found
 # fix package problem
 #RUN ln -s /usr/lib/x86_64-linux-gnu/libodbcinst.so.1 /usr/lib/x86_64-linux-gnu/libodbcinst.so.2
-
-
-
