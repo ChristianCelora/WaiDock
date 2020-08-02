@@ -5,3 +5,5 @@ wai/*
 !wai/.gitkeep
 include/*
 !include/.gitkeep
+backup_db/*
+!backup_db/.gitkeep
