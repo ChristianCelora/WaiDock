@@ -7,15 +7,18 @@ services:
   mysql:
     image: mysql:5.7.30
     container_name: wai_mysql
+    build:
+      context: .
+      dockerfile: Dockerfile_mysql
     restart: unless-stopped
     tty: true
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql # necessario se il restart è uguale ad unless-stopped
     environment:
-      MYSQL_DATABASE: dev
-      MYSQL_USER: dev
+      MYSQL_DATABASE: fenicia
+      MYSQL_USER: root
       MYSQL_PASSWORD: aa
       MYSQL_ROOT_PASSWORD: aa
     networks:
@@ -28,14 +31,18 @@ services:
     volumes:
       - ./wai:/var/www/wai
       - ./include:/var/www/include
+      - ./php/php_apache2.ini:/usr/local/etc/php/php.ini
       - ./apache/default.conf:/etc/apache2/sites-available/000-default.conf # per creare i virtualhost sovrascriviamo il default.conf
       - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     ports:
       - "9000:9000"
-      - "8081:80"
+      - "127.0.0.1:80:80" # mappo solo l'indirizzo di localhost sulla porta 80.
     networks:
       - wai
 # Una volta eseguito il container cambiare i permessi della cartella wai e include con il comando
 # sudo chown -R <user>:33 wai/  
 # sudo chown -R <user>:33 include/  
 # Dove <user> è l'utente del vostro pc (x modificare i file) e 33 è l'id dell'utente www-data (per farlo eseguire all'apache del docker)
+
+# Restore database
+# cat backup_db/wai_<database>.sql | docker exec -i <container> /usr/bin/mysql -u root --password=aa <database>

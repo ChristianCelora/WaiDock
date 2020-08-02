@@ -1,0 +1,6 @@
+FROM mysql:5.7.30
+
+# Add the content of the backup_db/ directory to your image
+# All scripts in docker-entrypoint-initdb.d/ are automatically
+# executed during container startup
+COPY ./backup_db/ /docker-entrypoint-initdb.d/
