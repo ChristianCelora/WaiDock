@@ -9,13 +9,14 @@ services:
     container_name: wai_mysql
     build:
       context: .
-      dockerfile: Dockerfile_mysql
+      dockerfile: ./dockerfile/mysql/Dockerfile
     restart: unless-stopped
     tty: true
     ports:
       - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql # necessario se il restart è uguale ad unless-stopped
+      - ./backup_db:/docker-entrypoint-initdb.d
     environment:
       MYSQL_DATABASE: fenicia
       MYSQL_USER: root
@@ -27,7 +28,7 @@ services:
     container_name: wai_php_apache
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./dockerfile/php_apache/Dockerfile
     volumes:
       - ./wai:/var/www/wai
       - ./include:/var/www/include

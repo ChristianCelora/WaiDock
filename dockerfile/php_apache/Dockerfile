@@ -43,11 +43,3 @@ COPY ./odbc_driver/odbcinst.ini /etc/odbcinst.ini
 # [unixODBC][Driver Manager]Can't open lib '/opt/ibm/iSeriesAccess/lib64/libcwbodbc.so' : file not found
 # fix package problem
 #RUN ln -s /usr/lib/x86_64-linux-gnu/libodbcinst.so.1 /usr/lib/x86_64-linux-gnu/libodbcinst.so.2
-
-
-FROM mysql:5.7.30
-
-# Add the content of the backup_db/ directory to your image
-# All scripts in docker-entrypoint-initdb.d/ are automatically
-# executed during container startup
-COPY ./backup_db/ /docker-entrypoint-initdb.d/
