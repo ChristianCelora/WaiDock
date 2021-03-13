@@ -13,15 +13,15 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "3306"
     volumes:
       - ./mysql:/var/lib/mysql # necessario se il restart è uguale ad unless-stopped
-      - ./backup_db:/docker-entrypoint-initdb.d
+      #- ./backup_db:/docker-entrypoint-initdb.d
     environment:
-      MYSQL_DATABASE: fenicia
+      #MYSQL_DATABASE: fenicia
       MYSQL_USER: root
-      MYSQL_PASSWORD: aa
-      MYSQL_ROOT_PASSWORD: aa
+      MYSQL_PASSWORD: s83dcpix!
+      MYSQL_ROOT_PASSWORD: s83dcpix!
     networks:
       - wai
   php:
@@ -46,4 +46,7 @@ services:
 # Dove <user> è l'utente del vostro pc (x modificare i file) e 33 è l'id dell'utente www-data (per farlo eseguire all'apache del docker)
 
 # Restore database
-# cat backup_db/wai_<database>.sql | docker exec -i <container> /usr/bin/mysql -u root --password=aa <database>
+# cat backup_db/wai_<database>.sql | docker exec -i <container> /usr/bin/mysql -u <MYSQL_USER> --password=<MYSL_PSW> <database>
+
+# Connettersi al bash docker mysql
+# docker exec -it wai_mysql bash -l
