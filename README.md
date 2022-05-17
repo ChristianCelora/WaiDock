@@ -20,7 +20,7 @@ docker inspect wai_mysql | grep IPAddress
 
 ### File configurazione driver odbc
 
-Creare 2 file **odbc.ini** e **odbcinst.ini** sotto la cartella odbc_driver con al loro interno le configurazioni dei 
+Creare 2 file **odbc.ini** e **odbcinst.ini** sotto la cartella odbc_driver con al loro interno le configurazioni del driver ODBC
 
 ## Prima esecuzione (problemi riscontrati sul WAI)
 
