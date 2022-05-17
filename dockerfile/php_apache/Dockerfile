@@ -2,6 +2,13 @@ FROM php:5.6-apache
 
 RUN apt-get update -y
 
+RUN apt-get install -y \
+    freetds-bin \
+    freetds-dev \
+    freetds-common
+
+RUN ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/
+
 # php extensions (commentate quelle in errore)
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install dba \
@@ -16,7 +23,8 @@ RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install sysvmsg \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install sysvsem \
-    && docker-php-ext-install mysqli
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install mssql 
 # RUN docker-php-ext-install pdo_dblib 
 # RUN docker-php-ext-install bz2 
 # RUN docker-php-ext-install mssql 
@@ -59,6 +67,6 @@ RUN set -ex; \
         apt-get update; \
         apt-get install -y --no-install-recommends unixodbc-dev; \
         docker-php-ext-configure odbc --with-unixODBC=shared,/usr; \
-        docker-php-ext-install odbc; \
+        docker-php-ext-install odbc; 
         #docker-php-source delete; \
         #apt-get purge -y --auto-remove
