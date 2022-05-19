@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "3306"
+      - "52000:3306" # fisso la porta del contenitore
     volumes:
       - ./mysql:/var/lib/mysql # necessario se il restart è uguale ad unless-stopped
       #- ./backup_db:/docker-entrypoint-initdb.d
