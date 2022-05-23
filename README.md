@@ -18,6 +18,34 @@ docker inspect wai_mysql | grep IPAddress
 
 Docker compose risolve automaticamente i container_name con il loro ip siccome sono sotto lo stesso network. 
 
+### Versione docker-compose
+La build necessita una versione di docker-compose > 1.6
+
+### Upgrade docker-compose
+
+Rimuove la versione installata
+```
+sudo apt-get remove docker-compose # se installato con apt-get
+sudo rm /usr/local/bin/docker-compose # Se installato con curl
+pip uninstall docker-compose # Se installato con pip
+```
+
+Controlla la versione e la salva per l'installazione
+```
+VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
+```
+
+Salva il apth di destinazione dell'installazione
+```
+DESTINATION=/usr/local/bin/docker-compose
+```
+
+Installa docker-compose con l'ultime versione
+```
+sudo curl -L https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m) -o $DESTINATION
+sudo chmod 755 $DESTINATION
+```
+
 ## Installazione
 
 ### File configurazione driver odbc
