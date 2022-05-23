@@ -5,8 +5,8 @@ networks:
 
 services:
   mysql:
-    image: mysql:5.7.30 # per chip M1 APPLE
-    platform: linux/amd64
+    image: mysql:5.7.30 
+    platform: linux/amd64 # scommentare per chip M1 APPLE
     container_name: wai_mysql
     build:
       context: .
@@ -26,8 +26,8 @@ services:
     networks:
       - wai
   php:
-    platform: linux/amd64 # per chip M1 APPLE
     container_name: wai_php_apache
+    platform: linux/amd64 # scommentare per chip M1 APPLE
     build:
       context: .
       dockerfile: ./dockerfile/php_apache/Dockerfile
