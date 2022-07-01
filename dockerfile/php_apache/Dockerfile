@@ -5,7 +5,8 @@ RUN apt-get update -y
 RUN apt-get install -y \
     freetds-bin \
     freetds-dev \
-    freetds-common
+    freetds-common \
+    zlib1g-dev
 
 RUN ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/
 
@@ -24,8 +25,9 @@ RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install sysvsem \
     && docker-php-ext-install mysqli \
-    && docker-php-ext-install mssql 
-# RUN docker-php-ext-install pdo_dblib 
+    && docker-php-ext-install mssql \
+    && docker-php-ext-install zip
+# RUN docker-php-ext-install pdo_dblib
 # RUN docker-php-ext-install bz2 
 # RUN docker-php-ext-install mssql 
 # RUN docker-php-ext-install wddx 
